@@ -15,7 +15,6 @@ public class RandProductMaker extends JFrame {
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Initialize GUI components
         JPanel panel = new JPanel(new GridLayout(6, 2));
 
         panel.add(new JLabel("Name:"));
@@ -50,7 +49,6 @@ public class RandProductMaker extends JFrame {
 
         add(panel);
 
-        // Create RandomAccessFile
         try {
             randomAccessFile = new RandomAccessFile("RandomProduct.dat", "rw");
         } catch (IOException e) {
@@ -60,7 +58,6 @@ public class RandProductMaker extends JFrame {
 
     private void addRecord() {
         try {
-            // Validate input fields
             if (nameField.getText().isEmpty() || descField.getText().isEmpty()
                     || idField.getText().isEmpty() || costField.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "All fields must be filled!");
@@ -73,14 +70,12 @@ public class RandProductMaker extends JFrame {
             String paddedId = String.format("%-6s", idField.getText());
             double cost = Double.parseDouble(costField.getText());
 
-            // Write record to the random access file
             randomAccessFile.seek(randomAccessFile.length());
             randomAccessFile.writeUTF(paddedName);
             randomAccessFile.writeUTF(paddedDesc);
             randomAccessFile.writeUTF(paddedId);
             randomAccessFile.writeDouble(cost);
 
-            // Update record count and clear fields
             recordCount++;
             countField.setText(String.valueOf(recordCount));
             nameField.setText("");

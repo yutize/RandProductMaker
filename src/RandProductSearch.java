@@ -15,7 +15,6 @@ public class RandProductSearch extends JFrame {
         setSize(400, 300);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Initialize GUI components
         JPanel panel = new JPanel(new GridLayout(2, 1));
 
         searchField = new JTextField();
@@ -35,7 +34,6 @@ public class RandProductSearch extends JFrame {
         add(panel, BorderLayout.NORTH);
         add(new JScrollPane(resultArea), BorderLayout.CENTER);
 
-        // Open the existing random access file
         try {
             randomAccessFile = new RandomAccessFile("RandomProduct.dat", "rw");
         } catch (IOException e) {
@@ -45,17 +43,14 @@ public class RandProductSearch extends JFrame {
 
     private void searchProducts() {
         try {
-            // Validate search field
             String searchName = searchField.getText();
             if (searchName.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Enter a product name to search.");
                 return;
             }
 
-            // Reset resultArea
             resultArea.setText("");
 
-            // Search for products matching the given name and display results in the resultArea
             randomAccessFile.seek(0);
             while (randomAccessFile.getFilePointer() < randomAccessFile.length()) {
                 String name = randomAccessFile.readUTF().trim();
